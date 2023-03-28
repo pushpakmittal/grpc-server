@@ -1,0 +1,6 @@
+protoc -Igoogleapis -I. --include_imports --include_source_info --descriptor_set_out=protobuf_descriptor/greeting.pb src/main/proto/greeting.proto
+
+sudo docker run -it --rm --name envoy --network="host" \
+  -v "$(pwd)/protobuf_descriptor/greeting.pb:/data/protobuf_descriptor/greeting.pb:ro" \
+  -v "$(pwd)/envoy-config.yml:/etc/envoy/envoy.yaml:ro" \
+  envoyproxy/envoy:dev-74e6754ba628773bddef36546761fce606babf4b

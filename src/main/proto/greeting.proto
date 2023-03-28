@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package com.myapp.grpc_server.proto;
+option java_multiple_files = true;
+
+import "google/api/annotations.proto";
+
+service Greeting {
+  rpc welcome(HelloRequest) returns (HelloResponse) {
+    option (google.api.http) = {
+      post: "/hello"
+      body: "*"
+    };
+  };
+}
+
+message HelloRequest {
+  string name = 1;
+}
+
+message HelloResponse {
+  string message = 2;
+}
